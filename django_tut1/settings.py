@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'register',
     'rest_framework_simplejwt',
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -96,16 +99,19 @@ WSGI_APPLICATION = 'django_tut1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'db.postgres',
-        'USER' : 'learningdjango',
-        'PASSWORD' : '1234'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':  'db.postgres',
+#         'USER' : 'learningdjango',
+#         'PASSWORD' : '1234'
+#     }
+# }
 
-ALLOWED_HOSTS = ['0.0.0.0']
+
+ALLOWED_HOSTS=['*']
+CROS_ORIGIN_ALLOW_ALL = True
+
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
