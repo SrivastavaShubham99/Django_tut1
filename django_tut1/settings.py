@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'register',
     'rest_framework_simplejwt',
-    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -62,6 +61,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
 
 
 ROOT_URLCONF = 'django_tut1.urls'
