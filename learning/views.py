@@ -9,7 +9,6 @@ from rest_framework.permissions import IsAuthenticated
 
 class RecipeView(generics.CreateAPIView) : 
     serializer_class=RecipeModelSerializer
-    
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
