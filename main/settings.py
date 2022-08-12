@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'register',
     'rest_framework_simplejwt',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
