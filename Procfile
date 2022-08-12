@@ -1,2 +1,2 @@
-web: gunicorn Django_tut1.wsgi
+web: gunicorn main.wsgi
 release: python manage.py migrate
