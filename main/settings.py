@@ -14,6 +14,7 @@ from decouple import config
 from pathlib import Path
 import os
 import dj_database_url
+from whitenoise import WhiteNoise
 
 
 
@@ -41,13 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # 'django.contrib.staticfiles',
     'learning',
     'rest_framework',
     'register',
     'rest_framework_simplejwt',
     'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -62,12 +62,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 
 
-ROOT_URLCONF = 'django_tut1.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
@@ -96,7 +96,7 @@ REST_FRAMEWORK = {
 }
 
 
-WSGI_APPLICATION = 'django_tut1.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 
 # Database
@@ -110,6 +110,15 @@ WSGI_APPLICATION = 'django_tut1.wsgi.application'
 #         'PASSWORD' : '1234'
 #     }
 # }
+
+#This is used for the production database ....
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 
 
 ALLOWED_HOSTS=['*']
@@ -177,11 +186,3 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
